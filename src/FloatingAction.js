@@ -17,6 +17,8 @@ import AddIcon from "./AddIcon";
 import { isIphoneX } from "./utils/platform";
 import { getTouchableComponent, getRippleProps } from "./utils/touchable";
 
+import LinearGradient from 'react-native-linear-gradient'
+
 const DEVICE_WIDTH = Dimensions.get("window").width;
 
 const DEFAULT_SHADOW_PROPS = {
@@ -432,18 +434,22 @@ class FloatingAction extends Component {
         accessible
         accessibilityLabel="Floating Action Button"
       >
-        <Touchable
-          {...getRippleProps(mainButtonColor)}
-          style={[styles.button, sizeStyle]}
-          activeOpacity={0.85}
-          onPress={this.animateButton}
-        >
-          <Animated.View
-            style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}
+        <LinearGradient style={sizeStyle}
+                start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                colors={['#478DCA', '#7A76BE', '#AE68A0']}>
+          <Touchable
+            {...getRippleProps(mainButtonColor)}
+            style={[styles.button, sizeStyle]}
+            activeOpacity={0.85}
+            onPress={this.animateButton}
           >
-            {this.getIcon()}
-          </Animated.View>
-        </Touchable>
+            <Animated.View
+              style={[styles.buttonTextContainer, sizeStyle, animatedViewStyle]}
+            >
+              {this.getIcon()}
+            </Animated.View>
+          </Touchable>
+        </LinearGradient>
       </Animated.View>
     );
   }
